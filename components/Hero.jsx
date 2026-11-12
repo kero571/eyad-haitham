@@ -19,13 +19,13 @@ export default async function Hero() {
 
         <div className="relative mt-auto px-5 pb-6 pt-44 md:order-1 md:mt-0 md:p-0">
           <h1
-            className="rise block rounded-2xl bg-white/50 px-4 py-3 text-[1.15rem] font-extrabold leading-snug tracking-tight text-espresso backdrop-blur-xl sm:w-fit sm:text-2xl md:max-w-xl md:rounded-none md:bg-transparent md:p-0 md:text-6xl md:leading-[1.08] md:text-white md:backdrop-blur-none"
+            className="rise block rounded-2xl bg-white/30 px-4 py-3 text-[1.15rem] font-extrabold leading-snug tracking-tight text-espresso backdrop-blur-sm sm:w-fit sm:text-2xl md:max-w-xl md:rounded-none md:bg-transparent md:p-0 md:text-4xl md:leading-[1.08] md:text-white md:backdrop-blur-none"
             style={{ '--i': 2 }}
           >
             {hero.title}
           </h1>
 
-          <p className="rise mt-4 max-w-md font-serif text-[15px] leading-relaxed text-white/90 md:mt-6 md:text-lg md:text-white/75" style={{ '--i': 3 }}>
+          <p className="rise mt-2 max-w-md font-serif text-[15px] leading-relaxed text-white/90 md:mt-6 md:text-lg md:text-white/75" style={{ '--i': 3 }}>
             {hero.subtitle}
           </p>
 
@@ -39,7 +39,7 @@ export default async function Hero() {
             </a>
           </div>
 
-          <ul className="mt-6 flex justify-between md:mt-10 md:max-w-md md:justify-start md:gap-6">
+          <ul className="mt-4 flex justify-between md:mt-10 md:max-w-md md:justify-start md:gap-6">
             {hero.tiles.map(({ id, label, icon }, i) => {
               const Icon = icons[icon] ?? BookOpen;
               return (
