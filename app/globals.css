@@ -165,3 +165,6 @@ body {
     transparent 1px 6px
   );
 }
+/* الـ header ثابت، فنسيب مسافة فوق السكاشن لما نروحلها من اللينكات */
+section[id], footer[id] { scroll-margin-top: 4.5rem; }
+#top { scroll-margin-top: 0; }

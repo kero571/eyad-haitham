@@ -4,18 +4,31 @@ import { Menu, X } from 'lucide-react';
 
 export default function Header({ nav, site, header }) {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
   useEffect(() => {
-    const k = (e) => e.key === 'Escape' && setOpen(false);
-    window.addEventListener('keydown', k);
-    return () => window.removeEventListener('keydown', k);
+    const onKey = (e) => e.key === 'Escape' && setOpen(false);
+    const onScroll = () => setScrolled(window.scrollY > 24); // setState بيتجاهل نفس القيمة، فمفيش re-render زيادة
+    onScroll();
+    window.addEventListener('keydown', onKey);
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('scroll', onScroll);
+    };
   }, []);
 
   // الزر بتاع اللابتوب بيغطي لينك الـ contact، فبنشيله من اللينكات
   const links = nav.filter((n) => `#${n.id}` !== header.cta.href);
 
   return (
-    <header className="absolute inset-x-0 top-0 z-30">
-      <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto] items-start px-5 pt-5 md:px-8 md:pt-7 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
+    <header className="fixed inset-x-0 top-0 z-30">
+      {/* خلفية بتظهر بعد الـ scroll */}
+      <div
+        aria-hidden="true"
+        className={`absolute inset-0 -z-10 bg-espresso/90 shadow-[0_1px_0_rgb(255_255_255/0.06)] backdrop-blur-md transition-opacity duration-300 ${scrolled ? 'opacity-100' : 'opacity-0'}`}
+      />
+      <div className="mx-auto grid max-w-6xl grid-cols-[1fr_auto] items-start px-5 py-4 md:px-8 md:py-5 lg:grid-cols-[1fr_auto_1fr] lg:items-center">
         <a href="#top" className="rise justify-self-start text-white" style={{ '--i': 0 }}>
           <span className="block text-xl font-extrabold leading-none tracking-tight md:text-2xl">{site.name}</span>
           <span className="mt-1 block font-serif text-[11px] italic text-white/85 md:hidden md:text-xs">{header.tagline}</span>
